@@ -61,6 +61,17 @@
 			"AND (index_id=0 or index_id=1);"
 		],
 		"description": "4 ways to get row count on large tables"
+	}, 
+	"Create db schema": {
+		"prefix": "sqlCreateSchema", 
+		"body": [
+			"CREATE SCHEMA [schemaNameHere]", 
+			"GO", 
+			"", 
+			"-- Run this query to see schema", 
+			"-- SELECT * FROM sys.schemas;"
+		], 
+		"description": "Create and view db schema."
 	}
 	 
 }

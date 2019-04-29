@@ -72,6 +72,17 @@
 			"-- SELECT * FROM sys.schemas;"
 		], 
 		"description": "Create and view db schema."
+	}, 
+	"Data stuff": {
+		"prefix": "sqlDataTypeInfo", 
+		"body": [
+			"SELECT column_name, data_type, CHARACTER_MAXIMUM_LENGTH, COLLATION_NAME",
+			"FROM INFORMATION_SCHEMA.COLUMNS",
+			"WHERE ", 
+			"TABLE_NAME = '' ",
+			"AND COLUMN_NAME = '' "
+		], 
+		"description": "What is the collation/data type length for a column?"
 	}
 	 
 }

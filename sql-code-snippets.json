@@ -85,7 +85,7 @@
 		"description": "What is the collation/data type length for a column?"
 	}, 
 	"Index info": {
-		"Prefix": "sqlIndexInfo", 
+		"prefix": "sqlIndexInfo", 
 		"body": [
 			"SELECT TableName = t.name, IndexName = ind.name, IndexId = ind.index_id, ColumnId = ic.index_column_id, ColumnName = col.name",
 			"--,ind.*, ic.*, col.* ",

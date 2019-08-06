@@ -1,6 +1,8 @@
 # code-snippets
 
-Code snippets, feature by Azure Data Studio.  Use the following to add.  
+Code snippets, feature by Azure Data Studio.  
+
+To update your code snippets, open the command pallet and paste in the contents of the .json file in this repo.  This file is saved below:
 
 Local (macOS) file repository: 
 > /Users/digitalduquette/Library/Application Support/azuredatastudio/User/snippets/sql.code-snippets

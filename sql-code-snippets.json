@@ -83,6 +83,19 @@
 			"AND COLUMN_NAME = '' "
 		], 
 		"description": "What is the collation/data type length for a column?"
+	}, 
+	"Index info": {
+		"Prefix": "sqlIndexInfo", 
+		"body": [
+			"SELECT TableName = t.name, IndexName = ind.name, IndexId = ind.index_id, ColumnId = ic.index_column_id, ColumnName = col.name",
+			"--,ind.*, ic.*, col.* ",
+			"FROM sys.indexes AS ind ",
+			"INNER JOIN sys.index_columns ic ON ( ind.object_id = ic.object_id and ind.index_id = ic.index_id )",
+			"INNER JOIN sys.columns AS col ON ( ic.object_id = col.object_id and ic.column_id = col.column_id )",
+			"INNER JOIN sys.tables AS t ON ( ind.object_id = t.object_id )",
+			"ORDER BY t.name, ind.name, ind.index_id, ic.index_column_id;"
+		],
+		"description": "What index are there - provides the names of index for quick alter"
 	}
 	 
 }

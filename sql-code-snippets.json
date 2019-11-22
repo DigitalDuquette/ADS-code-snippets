@@ -96,6 +96,18 @@
 			"ORDER BY t.name, ind.name, ind.index_id, ic.index_column_id;"
 		],
 		"description": "What index are there - provides the names of index for quick alter"
+	}, 
+	"MERGE statement": {
+		"prefix": "sqlMERGE",
+		"body": [
+			"MERGE target_schema.target_table AS tgt ",
+			"USING source_schema.category_staging AS srs ON ( s.category_id = t.category_id )",
+			"WHEN MATCHED THEN UPDATE SET tgt.column_name = s.column_name",
+			"WHEN NOT MATCHED BY TARGET THEN INSERT ( column_name )",
+			"VALUES ( srs.column_name )",
+			"WHEN NOT MATCHED BY SOURCE THEN DELETE;"
+		],
+		"description": "MERGE statement syntax"
 	}
 	 
 }

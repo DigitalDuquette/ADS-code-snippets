@@ -101,7 +101,7 @@
 		"prefix": "sqlMERGE",
 		"body": [
 			"MERGE target_schema.target_table AS tgt ",
-			"USING source_schema.category_staging AS srs ON ( s.category_id = t.category_id )",
+			"USING source_schema.staging AS srs ON ( srs.id = tgt.id )",
 			"WHEN MATCHED THEN UPDATE SET tgt.column_name = s.column_name",
 			"WHEN NOT MATCHED BY TARGET THEN INSERT ( column_name )",
 			"VALUES ( srs.column_name )",

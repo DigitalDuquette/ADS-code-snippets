@@ -76,11 +76,14 @@
 	"Data stuff": {
 		"prefix": "sqlDataTypeInfo", 
 		"body": [
-			"SELECT column_name, data_type, CHARACTER_MAXIMUM_LENGTH, COLLATION_NAME",
+			"SELECT",
+			"column_name, data_type, CHARACTER_MAXIMUM_LENGTH, COLLATION_NAME",
+			"-- distinct TABLE_SCHEMA, TABLE_NAME",
 			"FROM INFORMATION_SCHEMA.COLUMNS",
-			"WHERE ", 
-			"TABLE_NAME = '' ",
-			"AND COLUMN_NAME = '' "
+			"WHERE",
+			"TABLE_SCHEMA IN ('')",
+			"AND TABLE_NAME IN ('')",  
+			"AND COLUMN_NAME IN ('')"
 		], 
 		"description": "What is the collation/data type length for a column?"
 	}, 

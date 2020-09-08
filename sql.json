@@ -104,10 +104,17 @@
 		"prefix": "sqlMERGE",
 		"body": [
 			"MERGE target_schema.target_table AS tgt ",
-			"USING source_schema.staging AS srs ON ( srs.id = tgt.id )",
-			"WHEN MATCHED THEN UPDATE SET tgt.column_name = s.column_name",
-			"WHEN NOT MATCHED BY TARGET THEN INSERT ( column_name )",
-			"VALUES ( srs.column_name )",
+			"USING source_schema.staging AS srs ON ( ",
+			"\tsrs.id = tgt.id ",
+			")",
+			"WHEN MATCHED THEN UPDATE SET ",
+			"\ttgt.column_name = srs.column_name",
+			"WHEN NOT MATCHED BY TARGET THEN INSERT ( ",
+			"\tcolumn_name ",
+			")",
+			"VALUES ( ",
+			"\tsrs.column_name ",
+			")",
 			"WHEN NOT MATCHED BY SOURCE THEN DELETE;"
 		],
 		"description": "MERGE statement syntax"
@@ -119,6 +126,20 @@
 			"SELECT column_1, column_N FROM source_table;"
 		],
 		"description": "INSERT from SELECT"
+	}, 
+	"Try/Catch": {
+		"prefix": "sqlTryCatch",
+		"body": [
+			"BEGIN TRY",
+			"END TRY",
+			"BEGIN CATCH",
+			"\tEXECUTE tools.usp_transformation_log",
+			"\t\t@object_id = @@PROCID", 
+			"\t\t@row_count = @@ROWCOUNT",
+			"\t\t@message = 'step in code'",
+			"\t;",
+			"END CATCH" 
+		]
 	}
 	 
 }

@@ -111,6 +111,14 @@
 			"WHEN NOT MATCHED BY SOURCE THEN DELETE;"
 		],
 		"description": "MERGE statement syntax"
+	},
+	"INSERT from SELECT": {
+		"prefix": "sqlInsertSelect",
+		"body": [
+			"INSERT INTO target_table ( column_1, column_n )",
+			"SELECT column_1, column_N FROM source_table;"
+		],
+		"description": "INSERT from SELECT"
 	}
 	 
 }

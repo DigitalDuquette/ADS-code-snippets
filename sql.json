@@ -139,7 +139,18 @@
 			"\t\t@message = 'step in code'",
 			"\t;",
 			"END CATCH" 
-		]
+		],
+		"description": "Wrap code in Try/Catch and write to custom transformation log for internal audits."
+	}, 
+	"Drop Temp Table": {
+		"prefix": "sqlDropTempTable",
+		"body": [
+			"IF OBJECT_ID(N'tempdb..#TableName') IS NOT NULL",
+			"BEGIN",
+			"DROP TABLE #TableName",
+			"END"
+		],
+		"description": "Drop a temp table"
 	}
 	 
 }

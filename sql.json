@@ -161,6 +161,14 @@
 			"GO "
 		], 
 		"description": "Grant execute on object to user via t-sql."
+	}, 
+	"Space Used": {
+		"prefix": "sqlTableSize", 
+		"body": [
+			"USE database_name;",
+			"EXEC sp_spaceused N'schema.table_name'; "
+		],
+		"description": "See size of a table."
 	}
 	 
 }

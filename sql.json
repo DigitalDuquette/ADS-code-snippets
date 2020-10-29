@@ -169,6 +169,36 @@
 			"EXEC sp_spaceused N'schema.table_name'; "
 		],
 		"description": "See size of a table."
+	}, 
+	"Maintain Grain": {
+		"prefix": "sqlMaintainGrain", 
+		"body": [
+			"INSERT INTO schema.destination_table ( column1, column2 )",
+			"\tSELECT s.column1, s.column2",
+			"\tFROM schema.source_table AS s",
+			"\t\tLEFT OUTER JOIN schema.destination_table AS d ON (",
+			"\t\t\ts.column1 = d.column1",
+			"\t\t\tAND s.column2 = d.column2",
+			"\t\t)",
+			"\tWHERE (",
+			"\t\td.column1 IS NULL",
+			"\t\tAND d.column2 IS NULL",
+			"\t)",
+			";",
+			"DELETE FROM schema.destination_table",
+			"\tWHERE",
+			"\tNOT EXISTS (",
+			"\t\t\tSELECT",
+			"\t\t\t\ts.column1,",
+			"\t\t\t\ts.column2",
+			"\t\t\tFROM schema.source_table AS s",
+			"\t\t\tWHERE",
+			"\t\t\t\ts.column1 = destination_table.column1",
+			"\t\t\t\tAND s.column2 = destination_table.column2",
+			"\t\t)",
+			";"
+		], 
+		"description": "Stop using MERGE. Use Insert and Delete to maintain grain instead."
 	}
 	 
 }

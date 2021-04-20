@@ -1,14 +1,16 @@
 # Azure Data Studio Code Snippets
 
-Code snippets, one of my top favorite features in Azure Data Studio. This is why I dev in ADS and not SSMS. This sums up my feelings at least a half dozen times every day I'm doing any T-SQL development:
+Code snippets in Azure Data Studio: repetition is no guarantee for memorization.
 
 ![syntax-emotions](miscellany/img/what_was_that_syntax.png)
 
-There's relief!  It's simple to add any frequently used syntax to ADS!  This repo contains my frequently used code building blocks.  
+ADS snips are a core part of developing with t-sql and I use this batch of snippets daily.
 
 ## Install your snippets
 
-To update your code snippets, open the command pallet and paste in the contents of the .json file in this repo.  This file is saved below:
+To update your code snippets, open the command pallet and paste in the contents of the .json file in this repo.
+
+![how to install](miscellany/install-snippet.gif)
 
 Local (macOS) file repository:
 > /Users/digitalduquette/Library/Application Support/azuredatastudio/User/snippets/sql.json

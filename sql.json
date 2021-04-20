@@ -23,6 +23,48 @@
 		],
 		"description": "Provides standard view comment block"
 	},
+	"Stored Proc Header Comment": {
+		"prefix": "sqlCommentProcHeader",
+		"body": [
+			"/***************************************************************************************************",
+			"Procedure:          dbo.usp_DoSomeStuff",
+			"GitHub Repo:        PADNOS/Salesforce_Extensibility ",
+			"Create Date:        2018-01-25",
+			"Author:             Joe Expert",
+			"Description:        Verbose description of what the query does goes here. Be specific and don't be",
+			"\t\t\t\t\tafraid to say too much. More is better, than less, every single time. Think about",
+			"\t\t\t\t\t``what, when, where, how and why`` when authoring a description.",
+			"Call by:            [schema.usp_ProcThatCallsThis]",
+			"\t\t\t\t\t[Application Name]",
+			"\t\t\t\t\t[Job]",
+			"\t\t\t\t\t[PLC/Interface]",
+			"Affected table(s):  [schema.TableModifiedByProc1]",
+			"\t\t\t\t\t[schema.TableModifiedByProc2]",
+			"Used By:            Functional Area this is use in, for example, Payroll, Accounting, Finance",
+			"Parameter(s):       @param1 - description and usage",
+			"\t\t\t\t\t@param2 - description and usage",
+			"Usage:              EXEC dbo.usp_DoSomeStuff",
+			"\t\t\t\t\t@param1 = 1,",
+			"\t\t\t\t\t@param2 = 3,",
+			"\t\t\t\t\t@param3 = 2",
+			"\t\t\t\t\tAdditional notes or caveats about this object, like where is can and cannot be run, or",
+			"\t\t\t\t\tgotchas to watch for when using it.",
+			"****************************************************************************************************",
+			"SUMMARY OF CHANGES",
+			"Date(yyyy-mm-dd)    Author              Comments",
+			"------------------- ------------------- ------------------------------------------------------------",
+			"2012-04-27          John Usdaworkhur    Move Z <-> X was done in a single step. Warehouse does not",
+			"\t\t\t\t\tallow this. Converted to two step process.",
+			"\t\t\t\t\tZ <-> 7 <-> X",
+			"\t\t\t\t\t1) move class Z to class 7",
+			"\t\t\t\t\t2) move class 7 to class X",
+			"",
+			"2018-03-22          Maan Widaplan       General formatting and added header information.",
+			"2018-03-22          Maan Widaplan       Added logic to automatically Move G <-> H after 12 months.",
+			"***************************************************************************************************/"
+		],
+		"description": "Header comment block for stored procs"
+	},
 	"Recent Query": {
 		"prefix": "sqlRecentQuery",
 		"body": [
@@ -65,8 +107,7 @@
 	"Create db schema": {
 		"prefix": "sqlCreateSchema", 
 		"body": [
-			"CREATE SCHEMA [schemaNameHere]", 
-			"GO", 
+			"CREATE SCHEMA [schemaNameHere];", 
 			"", 
 			"-- Run this query to see schema", 
 			"-- SELECT * FROM sys.schemas;"
@@ -77,13 +118,13 @@
 		"prefix": "sqlDataTypeInfo", 
 		"body": [
 			"SELECT",
-			"column_name, data_type, CHARACTER_MAXIMUM_LENGTH, COLLATION_NAME",
-			"-- distinct TABLE_SCHEMA, TABLE_NAME",
+			"\tCOLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, COLLATION_NAME",
+			"\t-- distinct TABLE_SCHEMA, TABLE_NAME",
 			"FROM INFORMATION_SCHEMA.COLUMNS",
 			"WHERE",
-			"TABLE_SCHEMA IN ('')",
-			"AND TABLE_NAME IN ('')",  
-			"AND COLUMN_NAME IN ('')"
+			"\tTABLE_SCHEMA IN ('')",
+			"\tAND TABLE_NAME IN ('')",  
+			"\tAND COLUMN_NAME IN ('')"
 		], 
 		"description": "What is the collation/data type length for a column?"
 	}, 
@@ -104,18 +145,22 @@
 		"prefix": "sqlMERGE",
 		"body": [
 			"MERGE target_schema.target_table AS tgt ",
-			"USING source_schema.staging AS srs ON ( ",
-			"\tsrs.id = tgt.id ",
-			")",
-			"WHEN MATCHED THEN UPDATE SET ",
-			"\ttgt.column_name = srs.column_name",
-			"WHEN NOT MATCHED BY TARGET THEN INSERT ( ",
-			"\tcolumn_name ",
-			")",
-			"VALUES ( ",
-			"\tsrs.column_name ",
-			")",
-			"WHEN NOT MATCHED BY SOURCE THEN DELETE;"
+			"\tUSING source_schema.staging AS srs ON ( ",
+			"\t\tsrs.id = tgt.id ",
+			"\t)",
+			"\tWHEN MATCHED THEN UPDATE ",
+			"\t\tSET ",
+			"\t\t\ttgt.column_name = srs.column_name",
+			"\tWHEN NOT MATCHED BY TARGET THEN ",
+			"\t\tINSERT ( ",
+			"\t\t\tcolumn_name ",
+			"\t\t)",
+			"\t\tVALUES ( ",
+			"\t\t\tsrs.column_name ",
+			"\t\t)",
+			"\tWHEN NOT MATCHED BY SOURCE THEN ",
+			"\t\tDELETE",
+			";"
 		],
 		"description": "MERGE statement syntax"
 	},
@@ -156,9 +201,10 @@
 		"prefix": "sqlGrantEXEC",
 		"body": [
 			"USE database_name;",
+			"",
 			"GRANT EXECUTE ON OBJECT::schema.usp_proc_name  ",
-			"\tTO user_name;  ",
-			"GO "
+			"\tTO user_name ",
+			"; "
 		], 
 		"description": "Grant execute on object to user via t-sql."
 	}, 

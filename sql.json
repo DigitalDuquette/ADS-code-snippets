@@ -245,6 +245,19 @@
 			";"
 		], 
 		"description": "Stop using MERGE. Use Insert and Delete to maintain grain instead."
+	},
+	"UTC Datetime to Local": {
+		"prefix": "sqlDateUTCtoLocal",
+		"body": [
+			"CONVERT( /*replace SYSUTCDDATETIME() with UTC column*/",
+			"\tdatetime,", 
+			"\tSWITCHOFFSET(",
+			"\t\tSYSUTCDATETIME(), ",
+			"\t\tDATEPART(TZOFFSET, SYSUTCDATETIME() AT TIME ZONE 'Eastern Standard Time')",
+			"\t)",
+			") as converted_datetime "
+		],
+		"description": "Stop using GETDATE(), use SYSUTCDATETIME() and use your UTC dates in local time."
 	}
 	 
 }

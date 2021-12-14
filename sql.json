@@ -258,6 +258,31 @@
 			") as converted_datetime "
 		],
 		"description": "Stop using GETDATE(), use SYSUTCDATETIME() and use your UTC dates in local time."
+	},
+	"List triggers on table": {
+		"prefix": "sqlTriggerList",
+		"body": [
+			"SELECT /*list of triggers on table*/",
+			"\tsysobjects.name AS trigger_name ",
+			"\t,USER_NAME(sysobjects.uid) AS trigger_owner ",
+			"\t,s.name AS table_schema ",
+			"\t,OBJECT_NAME(parent_obj) AS table_name ",
+			"\t,OBJECTPROPERTY( id, 'ExecIsUpdateTrigger') AS isupdate ",
+			"\t,OBJECTPROPERTY( id, 'ExecIsDeleteTrigger') AS isdelete ",
+			"\t,OBJECTPROPERTY( id, 'ExecIsInsertTrigger') AS isinsert ",
+			"\t,OBJECTPROPERTY( id, 'ExecIsAfterTrigger') AS isafter ",
+			"\t,OBJECTPROPERTY( id, 'ExecIsInsteadOfTrigger') AS isinsteadof ",
+			"\t,OBJECTPROPERTY(id, 'ExecIsTriggerDisabled') AS [disabled] ",
+			"FROM sysobjects ",
+			"\tINNER JOIN sysusers ON sysobjects.uid = sysusers.uid ",
+			"\tINNER JOIN sys.tables t ON sysobjects.parent_obj = t.object_id ",
+			"\tINNER JOIN sys.schemas s ON t.schema_id = s.schema_id ",
+			"WHERE ",
+			"\tsysobjects.type = 'TR' ",
+			"\tAND t.name = 'tbl_name'"
+		], 
+		"description": "List triggers on a table for easy copy/paste into enable/disable."
 	}
+
 	 
 }

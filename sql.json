@@ -176,8 +176,12 @@
 		"prefix": "sqlTryCatch",
 		"body": [
 			"BEGIN TRY",
+			"\tDECLARE @place_in_code NVARCHAR(MAX);",
+			"\tSET @place_in_code = '';",
 			"END TRY",
 			"BEGIN CATCH",
+			"\tPRINT ERROR_MESSAGE();",
+			"\tPRINT @place_in_code;",
 			"\tEXECUTE tools.usp_transformation_log",
 			"\t\t@object_id = @@PROCID,", 
 			"\t\t@row_count = @@ROWCOUNT,",

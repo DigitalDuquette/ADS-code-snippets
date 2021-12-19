@@ -185,7 +185,7 @@
 			"\tEXECUTE tools.usp_transformation_log",
 			"\t\t@object_id = @@PROCID,", 
 			"\t\t@row_count = @@ROWCOUNT,",
-			"\t\t@message = 'step in code'",
+			"\t\t@message = @place_in_code",
 			"\t;",
 			"END CATCH" 
 		],

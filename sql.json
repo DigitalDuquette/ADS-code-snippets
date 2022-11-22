@@ -187,6 +187,7 @@
 			"\t\t@row_count = @@ROWCOUNT,",
 			"\t\t@message = @place_in_code",
 			"\t;",
+			"\tTHROW;",
 			"END CATCH" 
 		],
 		"description": "Wrap code in Try/Catch and write to custom transformation log for internal audits."

@@ -175,7 +175,9 @@
 	"Try/Catch": {
 		"prefix": "sqlTryCatch",
 		"body": [
+			"DECLARE @debug BIT = 0;",
 			"BEGIN TRY",
+			"\tIF @debug = 1 RAISERROR(N'', 0, 1) WITH NOWAIT;",
 			"\tDECLARE @place_in_code NVARCHAR(MAX);",
 			"\tSET @place_in_code = '';",
 			"END TRY",
